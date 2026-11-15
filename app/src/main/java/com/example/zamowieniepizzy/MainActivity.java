@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     private RadioGroup rgSize;
-
+    private FormState previousState;
     private CheckBox cbCheese, cbHam, cbMushrooms, cbTerms;
 
     private SeekBar sbQuantity;
@@ -56,6 +56,60 @@ public class MainActivity extends AppCompatActivity {
         setUpListeners();
     }
 
+    private static class FormState {
+
+        String address;
+        int size;
+        int dough;
+        int quantity;
+
+        boolean cheese;
+        boolean ham;
+        boolean mushrooms;
+        boolean terms;
+        boolean delivery;
+    }
+    private void restoreFormState(FormState state) {
+
+        etAddress.setText(state.address);
+
+        if (state.size == -1) {
+            rgSize.clearCheck();
+        } else {
+            rgSize.check(state.size);
+        }
+
+        spDough.setSelection(state.dough);
+        sbQuantity.setProgress(state.quantity);
+
+        cbCheese.setChecked(state.cheese);
+        cbHam.setChecked(state.ham);
+        cbMushrooms.setChecked(state.mushrooms);
+        cbTerms.setChecked(state.terms);
+
+        swDelivery.setChecked(state.delivery);
+
+        etAddress.setEnabled(state.delivery);
+
+        tvSummary.setText("");
+    }
+    private FormState saveFormState() {
+
+        FormState state = new FormState();
+
+        state.address = etAddress.getText().toString();
+        state.size = rgSize.getCheckedRadioButtonId();
+        state.dough = spDough.getSelectedItemPosition();
+        state.quantity = sbQuantity.getProgress();
+
+        state.cheese = cbCheese.isChecked();
+        state.ham = cbHam.isChecked();
+        state.mushrooms = cbMushrooms.isChecked();
+        state.terms = cbTerms.isChecked();
+        state.delivery = swDelivery.isChecked();
+
+        return state;
+    }
     private boolean validateForm() {
 
         if (rgSize.getCheckedRadioButtonId() == -1) {
