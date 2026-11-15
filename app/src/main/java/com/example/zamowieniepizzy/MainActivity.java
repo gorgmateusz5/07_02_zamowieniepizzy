@@ -239,7 +239,49 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.LENGTH_LONG
         ).show();
     }
+    private void askForClearConfirmation() {
 
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.clear_title)
+                .setMessage(R.string.clear_message)
+                .setPositiveButton(
+                        R.string.yes,
+                        (dialog, which) -> clearForm()
+                )
+                .setNegativeButton(R.string.no, null)
+                .show();
+    }
+
+    private void clearForm() {
+
+        // Zapamiętanie poprzedniego stanu
+        previousState = saveFormState();
+
+        // Czyszczenie pól tekstowych
+        etAddress.setText("");
+        etAddress.setError(null);
+
+        // Czyszczenie RadioGroup
+        rgSize.clearCheck();
+
+        // Spinner na pierwszą pozycję
+        spDough.setSelection(0);
+
+        // SeekBar na zero
+        sbQuantity.setProgress(0);
+
+        // CheckBox
+        cbCheese.setChecked(false);
+        cbHam.setChecked(false);
+        cbMushrooms.setChecked(false);
+        cbTerms.setChecked(false);
+
+        // Switch
+        swDelivery.setChecked(false);
+
+        // Usunięcie podsumowania
+        tvSummary.setText("");
+    }
     private void setUpSpinner() {
 
         ArrayAdapter<CharSequence> adapter =
@@ -271,8 +313,9 @@ public class MainActivity extends AppCompatActivity {
                         etAddress.setError(null);
                     }
                 }
-        );
 
+        );
+        btnClear.setOnClickListener(v -> askForClearConfirmation());
         etAddress.setEnabled(false);
 
         sbQuantity.setOnSeekBarChangeListener(
