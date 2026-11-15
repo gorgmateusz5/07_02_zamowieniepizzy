@@ -1,8 +1,9 @@
 package com.example.zamowieniepizzy;
-
+import androidx.appcompat.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import androidx.activity.EdgeToEdge;
@@ -53,6 +54,136 @@ public class MainActivity extends AppCompatActivity {
 
         setUpSpinner();
         setUpListeners();
+    }
+
+    private boolean validateForm() {
+
+        if (rgSize.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(
+                    this,
+                    R.string.error_size,
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            return false;
+        }
+
+        if (spDough.getSelectedItemPosition() == 0) {
+            Toast.makeText(
+                    this,
+                    R.string.error_dough,
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            return false;
+        }
+
+        if (swDelivery.isChecked()
+                && etAddress.getText().toString().trim().isEmpty()) {
+
+            etAddress.setError(
+                    getString(R.string.error_address)
+            );
+
+            etAddress.requestFocus();
+
+            return false;
+        }
+
+        if (!cbTerms.isChecked()) {
+            Toast.makeText(
+                    this,
+                    R.string.error_terms,
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private String getSize() {
+
+        int id = rgSize.getCheckedRadioButtonId();
+
+        if (id == R.id.rbSmall) {
+            return getString(R.string.small);
+        }
+
+        if (id == R.id.rbMedium) {
+            return getString(R.string.medium);
+        }
+
+        return getString(R.string.large);
+    }
+
+    private String getToppings() {
+
+        String result = "";
+
+        if (cbCheese.isChecked()) {
+            result += getString(R.string.cheese) + ", ";
+        }
+
+        if (cbHam.isChecked()) {
+            result += getString(R.string.ham) + ", ";
+        }
+
+        if (cbMushrooms.isChecked()) {
+            result += getString(R.string.mushrooms) + ", ";
+        }
+
+        if (result.isEmpty()) {
+            return "Brak";
+        }
+
+        return result.substring(0, result.length() - 2);
+    }
+
+    private String buildSummary() {
+
+        String delivery = swDelivery.isChecked()
+                ? "Tak"
+                : "Odbiór osobisty";
+
+        String address = swDelivery.isChecked()
+                ? etAddress.getText().toString().trim()
+                : "Brak";
+
+        return getString(
+                R.string.summary_format,
+                getSize(),
+                getToppings(),
+                sbQuantity.getProgress() + 1,
+                spDough.getSelectedItem().toString(),
+                delivery,
+                address
+        );
+    }
+
+    private void askForConfirmation() {
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.confirm_title)
+                .setMessage(R.string.confirm_message)
+                .setPositiveButton(
+                        R.string.yes,
+                        (dialog, which) -> submitOrder()
+                )
+                .setNegativeButton(R.string.no, null)
+                .show();
+    }
+
+    private void submitOrder() {
+
+        tvSummary.setText(buildSummary());
+
+        Snackbar.make(
+                findViewById(R.id.main),
+                R.string.ordered,
+                Snackbar.LENGTH_LONG
+        ).show();
     }
 
     private void setUpSpinner() {
@@ -112,5 +243,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onStopTrackingTouch(SeekBar seekBar) {
                     }
                 });
+        btnOrder.setOnClickListener(v -> {
+
+            if (validateForm()) {
+                askForConfirmation();
+            }
+
+        });
     }
 }
