@@ -1,0 +1,48 @@
+
+<resources>
+    <string name="app_name">Zamówienie pizzy</string>
+    <string name="header">Zamów swoją pizzę</string>
+    <string name="size_label">Rozmiar pizzy</string>
+    <string name="small">Mała</string>
+    <string name="medium">Średnia</string>
+    <string name="large">Duża</string>
+
+    <string name="toppings_label">Dodatki</string>
+    <string name="cheese">Dodatkowy ser</string>
+    <string name="ham">Szynka</string>
+    <string name="mushrooms">Pieczarki</string>
+
+    <string name="quantity_label">Ilość pizz</string>
+    <string name="dough_label">Rodzaj ciasta</string>
+    <string name="address_label">Adres dostawy</string>
+    <string name="address_hint">Podaj adres dostawy</string>
+    <string name="delivery">Dostawa do domu</string>
+    <string name="terms">Akceptuję regulamin</string>
+    <string name="order_button">ZŁÓŻ ZAMÓWIENIE</string>
+    <string name="clear_button">WYCZYŚĆ FORMULARZ</string>
+
+    <string name="error_size">Wybierz rozmiar pizzy</string>
+    <string name="error_dough">Wybierz rodzaj ciasta</string>
+    <string name="error_address">Podaj adres dostawy</string>
+    <string name="error_terms">Zaakceptuj regulamin</string>
+
+    <string name="confirm_title">Potwierdzenie zamówienia</string>
+    <string name="confirm_message">Czy na pewno chcesz złożyć zamówienie?</string>
+    <string name="clear_title">Wyczyścić formularz?</string>
+    <string name="clear_message">Czy na pewno chcesz usunąć wszystkie dane?</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+
+    <string name="ordered">Zamówienie zostało złożone</string>
+    <string name="cleared">Formularz został wyczyszczony</string>
+    <string name="undo">Cofnij</string>
+
+    <string name="summary_format">Zamówienie pizzy\nRozmiar: %1$s\nDodatki: %2$s\nIlość: %3$d\nCiasto: %4$s\nDostawa: %5$s\nAdres: %6$s</string>
+
+    <string-array name="dough_types">
+        <item>-- wybierz ciasto --</item>
+        <item>Cienkie</item>
+        <item>Grube</item>
+        <item>Bezglutenowe</item>
+    </string-array>
+</resources>

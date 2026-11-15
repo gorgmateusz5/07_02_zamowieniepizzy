@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <?xml version="1.0" encoding="utf-8"?>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/header"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/size_label"
+                android:layout_marginTop="16dp" />
+
+            <RadioGroup
+                android:id="@+id/rgSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/small" />
+
+                <RadioButton
+                    android:id="@+id/rbMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/medium" />
+
+                <RadioButton
+                    android:id="@+id/rbLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/large" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/toppings_label"
+                android:layout_marginTop="12dp" />
+
+            <CheckBox
+                android:id="@+id/cbCheese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cheese" />
+
+            <CheckBox
+                android:id="@+id/cbHam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ham" />
+
+            <CheckBox
+                android:id="@+id/cbMushrooms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mushrooms" />
+
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/quantity_label" />
+
+            <SeekBar
+                android:id="@+id/sbQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="9"
+                android:progress="0" />
+
+            <TextView
+                android:id="@+id/tvQuantityValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dough_label"
+                android:layout_marginTop="12dp" />
+
+            <Spinner
+                android:id="@+id/spDough"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/swDelivery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery" />
+
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/address_hint"
+                android:inputType="textPostalAddress"
+                android:maxLines="2" />
+
+            <CheckBox
+                android:id="@+id/cbTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terms" />
+
+            <Button
+                android:id="@+id/btnOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/order_button"
+                android:enabled="false" />
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/clear_button" />
+
+            <TextView
+                android:id="@+id/tvSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
