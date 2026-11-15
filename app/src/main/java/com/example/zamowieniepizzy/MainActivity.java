@@ -71,7 +71,11 @@ public class MainActivity extends AppCompatActivity {
     }
     private void restoreFormState(FormState state) {
 
+        swDelivery.setChecked(state.delivery);
+
         etAddress.setText(state.address);
+        etAddress.setEnabled(state.delivery);
+        etAddress.setError(null);
 
         if (state.size == -1) {
             rgSize.clearCheck();
@@ -80,16 +84,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         spDough.setSelection(state.dough);
+
         sbQuantity.setProgress(state.quantity);
 
         cbCheese.setChecked(state.cheese);
         cbHam.setChecked(state.ham);
         cbMushrooms.setChecked(state.mushrooms);
         cbTerms.setChecked(state.terms);
-
-        swDelivery.setChecked(state.delivery);
-
-        etAddress.setEnabled(state.delivery);
 
         tvSummary.setText("");
     }
@@ -254,33 +255,39 @@ public class MainActivity extends AppCompatActivity {
 
     private void clearForm() {
 
-        // Zapamiętanie poprzedniego stanu
         previousState = saveFormState();
 
-        // Czyszczenie pól tekstowych
         etAddress.setText("");
         etAddress.setError(null);
 
-        // Czyszczenie RadioGroup
         rgSize.clearCheck();
 
-        // Spinner na pierwszą pozycję
         spDough.setSelection(0);
 
-        // SeekBar na zero
         sbQuantity.setProgress(0);
 
-        // CheckBox
         cbCheese.setChecked(false);
         cbHam.setChecked(false);
         cbMushrooms.setChecked(false);
         cbTerms.setChecked(false);
 
-        // Switch
         swDelivery.setChecked(false);
 
-        // Usunięcie podsumowania
         tvSummary.setText("");
+
+        Snackbar.make(
+                        findViewById(R.id.main),
+                        R.string.cleared,
+                        Snackbar.LENGTH_LONG
+                )
+                .setAction(R.string.undo, v -> {
+
+                    if (previousState != null) {
+                        restoreFormState(previousState);
+                    }
+
+                })
+                .show();
     }
     private void setUpSpinner() {
 
